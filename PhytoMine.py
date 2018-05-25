@@ -18,25 +18,27 @@ query = service.new_query("Gene")
 
 # The view specifies the output columns
 query.add_view(
+    "name", "primaryIdentifier", "secondaryIdentifier", "length",
     "flankingRegions.length", "flankingRegions.includeGene",
-    "flankingRegions.primaryIdentifier", "flankingRegions.direction"
+    "flankingRegions.direction", "flankingRegions.primaryIdentifier",
+    "flankingRegions.sequence.length", "flankingRegions.sequence.residues"
 )
 
-# This query's custom sort order is specified below:
-query.add_sort_order("Gene.flankingRegions.primaryIdentifier", "ASC")
+# Uncomment and edit the line below (the default) to select a custom sort order:
+# query.add_sort_order("Gene.name", "ASC")
 
 # You can edit the constraint values below
-query.add_constraint("flankingRegions.length", "ONE OF", ["5000"], code = "A")
+query.add_constraint("flankingRegions.length", "=", "5000", code = "A")
 query.add_constraint("flankingRegions.includeGene", "=", "false", code = "B")
-query.add_constraint("flankingRegions.primaryIdentifier", "CONTAINS", "Vigun", code = "C")
-query.add_constraint("flankingRegions.direction", "ONE OF", ["upstream"], code = "D")
-
+query.add_constraint("flankingRegions.direction", "=", "upstream", code = "C")
+query.add_constraint("name", "=", "Vigun03g422000", code = "D")
 
 # Uncomment and edit the code below to specify your own custom logic:
-query.set_logic("A and B and C and D")
+# query.set_logic("A and B and C and E")
 
-i=
 for row in query.rows():
+    print (row["name"], row["primaryIdentifier"], row["secondaryIdentifier"], row["length"], \
+        row["flankingRegions.length"], row["flankingRegions.includeGene"], \
+        row["flankingRegions.direction"], row["flankingRegions.primaryIdentifier"], \
+        row["flankingRegions.sequence.length"], row["flankingRegions.sequence.residues"])
 
-    print (row["flankingRegions.length"], row["flankingRegions.includeGene"], \
-        row["flankingRegions.primaryIdentifier"], row["flankingRegions.direction"])

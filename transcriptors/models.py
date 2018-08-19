@@ -16,7 +16,11 @@ class Family (models.Model):
 class Transcriptor(models.Model):
 	id = models.CharField('ID', primary_key=True, max_length=255)
 	name = models.CharField('Nome', max_length=255)
-	family = models.ForeignKey(Family, on_delete=models.SET_NULL, null=True, verbose_name='Família')
+	family = models.CharField('Família', max_length=255, null=True, blank=True)
+	a = models.CharField('A', max_length=10000, null=False, blank=False)
+	c = models.CharField('C', max_length=10000, null=False, blank=False)
+	g = models.CharField('G', max_length=10000, null=False, blank=False)
+	t = models.CharField('T', max_length=10000, null=False, blank=False)
 	matrix = models.CharField('Matriz', max_length=10000, null=False, blank=False)
 	motifs = models.CharField('Motivos', max_length=10000, null=False, blank=False)
 	reverseComplement = models.CharField('Complemento reverso', max_length=10000, null=False, blank=False)

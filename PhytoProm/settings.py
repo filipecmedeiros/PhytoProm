@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'transcriptors',
     'promoter',
+    'log',
 ]
 
 MIDDLEWARE = [

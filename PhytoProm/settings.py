@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #libs
     'whitenoise',
+    'widget_tweaks',
     #Apps
     'core',
     'transcriptors',

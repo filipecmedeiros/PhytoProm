@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     #Apps
     'core',
-    'transcriptors',
-    'promoter',
-    'log',
+    'ecr'
 ]
 
 MIDDLEWARE = [

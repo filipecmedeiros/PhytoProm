@@ -1,8 +1,7 @@
 from django.db import models
+import django_tables2 as tables
 
 # Create your models here.
-
-
 class Family (models.Model):
     id = models.CharField('Nome', primary_key=True, max_length=255)
 
@@ -69,11 +68,13 @@ class Promoter(models.Model):
 
 class Log(models.Model):
     promoter = models.ForeignKey(
-        Promoter, on_delete=models.CASCADE, verbose_name='Promotor')
-    tf_id = models.ForeignKey(
+        Promoter, on_delete=models.CASCADE, null=True, verbose_name='Promotor')
+    tf = models.ForeignKey(
         Transcriptor, on_delete=models.CASCADE, verbose_name='Fator de transcrição')
-    mean = models.FloatField('Média')
-    sumatory = models.IntegerField('Somatório')
+    upstream = models.TextField('5l3l', null=True, blank=True)
+    downstream = models.TextField('3l5l', null=True, blank=True)
+    mean = models.FloatField('Média', null=True, blank=True)
+    sumatory = models.IntegerField('Somatório', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Log'
@@ -87,18 +88,26 @@ class Log(models.Model):
 class Background(models.Model):
     id = models.CharField('ID', primary_key=True, max_length=255)
     name = models.CharField('Nome', max_length=255, null=False, blank=False)
+    family = models.ForeignKey(
+        Family, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Família')
     matrix = models.TextField(
         'Matriz', max_length=10000, null=False, blank=False)
     motifs = models.CharField(
         'Motivos', max_length=10000, null=False, blank=False)
     reverseComplement = models.CharField(
         'Complemento reverso', max_length=10000, null=False, blank=False)
-    vigna_genome = models.IntegerField('Genoma')
+    vigna_genome = models.IntegerField('Genoma de Vigna')
 
     class Meta:
         verbose_name = 'Background'
         verbose_name_plural = 'Backgrounds'
-        ordering = ['id', 'name']
+        ordering = ['family', 'id']
 
     def __str__(self):
         return self.id
+
+class BackgroundTable(tables.Table):
+    class Meta:
+        model = Background
+        exclude = ['matrix']
+        template_name='django_tables2/bootstrap4.html'

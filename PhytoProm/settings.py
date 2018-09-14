@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     #libs
     'whitenoise',
     'widget_tweaks',
+    'django_tables2',
     #Apps
     'core',
     'ecr'

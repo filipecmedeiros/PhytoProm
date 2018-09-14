@@ -24,9 +24,9 @@ class PromoterAdmin(admin.ModelAdmin):
 	list_filter = ['specie']
 
 class LogAdmin(admin.ModelAdmin):
-	list_display = ['promoter', 'tf_id', 'mean', 'sumatory']
-	search_list = ['promoter', 'tf_id', 'mean', 'sumatory']
-	filter_list = ['promoter', 'tf_id']
+	list_display = ['promoter_id', 'tf_id', 'mean', 'sumatory']
+	search_list = ['promoter_id', 'tf_id', 'mean', 'sumatory']
+	filter_list = ['promoter_id', 'tf_id']
 
 class BackgroundAdmin(admin.ModelAdmin):
 	list_display = ['id', 'name', 'motifs', 'reverseComplement', 'vigna_genome']

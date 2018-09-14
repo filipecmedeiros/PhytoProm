@@ -1,6 +1,10 @@
 from django import forms
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
 
-from .models import Specie, Log, Background, BackgroundTable
+from .models import Specie, Log, Background, LogTable
 
 
 class AnalyzeForm(forms.Form):
@@ -10,13 +14,15 @@ class AnalyzeForm(forms.Form):
     cutoff = forms.IntegerField(label='Cut off')
 
     def analyze(self):
+        cluster = self.cleaned_data['cluster']
+        cutoff = self.cleaned_data['cutoff']
+
+
+        cluster = cluster.split('\r\n')
         context = {
             'success':True,
             'specie':self.cleaned_data['specie'],
-            'cluster':self.cleaned_data['cluster'],
-            'cutoff':self.cleaned_data['cutoff'],
-            'log': Log.objects.filter(promoter=cluster),
-            'table':BackgroundTable(Background.objects.all()),
+            'table':LogTable(Log.objects.filter(promoter_id__in=cluster)),
         }
 
         return context

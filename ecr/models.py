@@ -67,8 +67,7 @@ class Promoter(models.Model):
 
 
 class Log(models.Model):
-    promoter = models.ForeignKey(
-        Promoter, on_delete=models.CASCADE, null=True, verbose_name='Promotor')
+    promoter_id = models.CharField('Promotor', null=True, max_length=255)
     tf = models.ForeignKey(
         Transcriptor, on_delete=models.CASCADE, verbose_name='Fator de transcrição')
     upstream = models.TextField('5l3l', null=True, blank=True)
@@ -79,10 +78,10 @@ class Log(models.Model):
     class Meta:
         verbose_name = 'Log'
         verbose_name_plural = 'Logs'
-        ordering = ['promoter', 'tf_id']
+        ordering = ['promoter_id', 'tf_id']
 
     def __str__(self):
-        return self.gene + ' ' + self.tf_id
+        return self.promoter_id + ' ' + self.tf_id
 
 
 class Background(models.Model):
@@ -106,8 +105,7 @@ class Background(models.Model):
     def __str__(self):
         return self.id
 
-class BackgroundTable(tables.Table):
+class LogTable(tables.Table):
     class Meta:
-        model = Background
-        exclude = ['matrix']
+        model = Log
         template_name='django_tables2/bootstrap4.html'

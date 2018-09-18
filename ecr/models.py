@@ -1,5 +1,4 @@
 from django.db import models
-import django_tables2 as tables
 
 # Create your models here.
 class Family (models.Model):
@@ -104,8 +103,3 @@ class Background(models.Model):
 
     def __str__(self):
         return self.id
-
-class LogTable(tables.Table):
-    class Meta:
-        model = Log
-        template_name='django_tables2/bootstrap4.html'

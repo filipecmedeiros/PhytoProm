@@ -22,6 +22,7 @@ class PromoterAdmin(admin.ModelAdmin):
 	list_display = ['locus', 'specie', 'size', 'direction']
 	search_display = ['locus', 'specie', 'size', 'direction']
 	list_filter = ['specie']
+	search_fields = ['locus']
 
 class LogAdmin(admin.ModelAdmin):
 	list_display = ['promoter_id', 'tf_id', 'mean', 'sumatory']

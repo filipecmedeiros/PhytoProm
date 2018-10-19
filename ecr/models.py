@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Family (models.Model):
     id = models.CharField('Nome', primary_key=True, max_length=255)
 
@@ -69,15 +71,15 @@ class Log(models.Model):
     promoter_id = models.CharField('Promotor', null=True, max_length=255)
     tf = models.ForeignKey(
         Transcriptor, on_delete=models.CASCADE, verbose_name='Fator de transcrição')
-    upstream = models.TextField('5l3l', null=True, blank=True)
-    downstream = models.TextField('3l5l', null=True, blank=True)
+    upstream = models.TextField('upstream', null=True, blank=True)
+    downstream = models.TextField('downstream', null=True, blank=True)
     mean = models.FloatField('Média', null=True, blank=True)
     sumatory = models.IntegerField('Somatório', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Log'
         verbose_name_plural = 'Logs'
-        ordering = ['promoter_id', 'tf_id']
+        ordering = ['promoter_id', 'tf']
 
     def __str__(self):
         return self.promoter_id + ' ' + self.tf_id

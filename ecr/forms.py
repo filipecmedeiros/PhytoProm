@@ -19,20 +19,33 @@ class AnalyzeForm(forms.Form):
         cluster = cluster.split('\r\n')
 
         df = pd.DataFrame(list(Background.objects.all().values(
-            'id', 'family_id', 'motifs', 'reverseComplement', 'vigna_genome')))
-        
+            'id', 'name', 'family', 'motifs', 'reverseComplement', 'vigna_genome')))
+        df['cluster'] = 0
 
+        queryset = Log.objects.filter(promoter_id__in=cluster)
+        log = pd.DataFrame(list(queryset.values(
+            'promoter_id', 'tf', 'upstream', 'downstream', 'mean', 'sumatory')))
 
-        i = df.groupby('tf_id').sum()
-        df = df.groupby('tf_id')
-        df['vigna_genome'] = i['sumatory'].values.copy()
-        df['Cluster'] = 0
+        enrichment = log.groupby('tf').sum()
+
+        tf = Transcriptor.objects.all().exclude(id__in=enrichment.tf)
+        tf = pd.DataFrame(list(tf.values('id')))
+                                
+        tf.rename(columns={'id':'tf'}, inplace=True)
+        tf['mean'] = 0
+        tf['sumatory'] = 0
+
+        enrichment = pd.concat([enrichment, tf])
+        enrichment = enrichment.sort_values(by='tf')
+        print (enrichment)
+        df = df.sort_values(by='id')
+        df['cluster'] = enrichment['sumatory']
 
         context = {
             'success': True,
-            'dataframe': df.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-hover']),
+            'dataframe' : df.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-hover']),
             'specie': self.cleaned_data['specie'],
-            #'table': list(queryset),
+            'table': list(queryset),
             #'log': log.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-hover']),
         }
 

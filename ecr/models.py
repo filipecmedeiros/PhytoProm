@@ -101,7 +101,7 @@ class Background(models.Model):
     class Meta:
         verbose_name = 'Background'
         verbose_name_plural = 'Backgrounds'
-        ordering = ['family', 'id']
+        ordering = ['id']
 
     def __str__(self):
         return self.id

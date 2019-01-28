@@ -10,7 +10,7 @@ class AnalyzeForm(forms.Form):
     specie = forms.ModelChoiceField(
         label='Specie', queryset=Specie.objects.all(), widget=forms.Select())
     cluster = forms.CharField(label='Cluster', widget=forms.Textarea())
-    cutoff = forms.IntegerField(label='Cut off')
+    cutoff = forms.FloatField(label='Cut off')
 
     def analyze(self):
         cluster = self.cleaned_data['cluster']
@@ -49,11 +49,17 @@ class AnalyzeForm(forms.Form):
         df['p-value'] = df.apply(lambda x: stats.fisher_exact(
             [[x['vigna_genome'], x['cluster']], [vigna_genome, cluster]])[1], axis=1)
 
+
+        enrichment = df.copy()
+
+        enrichment = enrichment.loc[enrichment['p-value'] <= cutoff]
+
         context = {
             'success': True,
             'dataframe':df.values.tolist(),
             'specie': self.cleaned_data['specie'],
             'log': list(queryset),
+            'enrichment':enrichment.values.tolist(),
         }
 
         return context

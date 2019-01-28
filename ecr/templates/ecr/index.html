@@ -45,19 +45,61 @@
             <br/>
             <br/>
             <br/>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseEnriched" role="button" aria-expanded="true" aria-controls="collapseLog">
+                Enriched Cis-Elements
+            </a>
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseCis" role="button" aria-expanded="false" aria-controls="collapseCis">
                 General Cis-Element list's
             </a>
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseLog" role="button" aria-expanded="false" aria-controls="collapseLog">
                 PhytoProm Log result
             </a>
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseEnriched" role="button" aria-expanded="false" aria-controls="collapseLog">
-                Enriched Cis-Elements
-            </a>
             <br/>
             <br/>
             <br/>
             <br/>
+            <div class="collapse" id="collapseEnriched">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Enriched Cis-Element list's with data analysis:
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <!-- {{ dataframe | safe }} -->
+
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Family</th>
+                                    <th>ID</th>
+                                    <th>Motifs</th>
+                                    <th>Name</th>
+                                    <th>Reverse Complement</th>
+                                    <th>Vigna Genome</th>
+                                    <th>Cluster</th>
+                                    <th>p-value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for list in enrichment %}
+                                    <tr class="">
+                                        {% for row in list%}
+                                            <td>
+                                                {% if forloop.counter == 4 %}
+                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}" target="_blank">
+                                                {% endif %}
+                                                {{ row }}
+                                                </a>
+                                            </td>
+                                        {% endfor%}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="collapse" id="collapseCis">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -96,17 +138,6 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-            <div class="collapse" id="collapseEnriched">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Enriched Cis-Elements list's with data analysis:
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        {{ enrichment | safe }}
                     </div>
                 </div>
             </div>

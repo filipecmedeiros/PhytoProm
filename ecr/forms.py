@@ -36,11 +36,9 @@ class AnalyzeForm(forms.Form):
         enrichment = pd.concat([enrichment, tf])
         enrichment = enrichment.sort_values(by='tf')
         enrichment = enrichment.reset_index(drop=True)
-        print(enrichment)
 
         df = df.sort_values(by='id')
         df = df.reset_index(drop=True)
-        print(df)
 
         df['cluster'] = enrichment['sumatory']
 
@@ -53,10 +51,9 @@ class AnalyzeForm(forms.Form):
 
         context = {
             'success': True,
-            'dataframe': df.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-hover']),
+            'dataframe':df.values.tolist(),
             'specie': self.cleaned_data['specie'],
-            'table': list(queryset),
-            #'log': log.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-hover']),
+            'log': list(queryset),
         }
 
         return context

@@ -4,7 +4,7 @@ import pandas as pd
 import scipy.stats as stats
 
 from .models import Specie, Log, Background, Transcriptor
-
+import json
 
 class AnalyzeForm(forms.Form):
     specie = forms.ModelChoiceField(
@@ -24,6 +24,9 @@ class AnalyzeForm(forms.Form):
         queryset = Log.objects.filter(promoter_id__in=cluster)
         log = pd.DataFrame(list(queryset.values(
             'promoter_id', 'tf', 'upstream', 'downstream', 'mean', 'sumatory')))
+
+        log.to_json(r'ecr/templates/data/analysis.json', orient='records')
+
 
         enrichment = log.groupby('tf').sum().reset_index()
 
@@ -61,5 +64,4 @@ class AnalyzeForm(forms.Form):
             'log': list(queryset),
             'enrichment':enrichment.values.tolist(),
         }
-
         return context

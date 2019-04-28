@@ -75,7 +75,7 @@
                                     <th>Family</th>
                                     <th>ID</th>
                                     <th>Motifs</th>
-                                    <th>Name</th>
+                                    <th>Scientific Library(PubMed)</th>
                                     <th>Reverse Complement</th>
                                     <th>Vigna Genome</th>
                                     <th>Cluster</th>
@@ -88,7 +88,7 @@
                                         {% for row in list%}
                                             <td>
                                                 {% if forloop.counter == 4 %}
-                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}" target="_blank">
+                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
                                                 {% endif %}
                                                 {{ row }}
                                                 </a>
@@ -117,7 +117,7 @@
                                     <th>Family</th>
                                     <th>ID</th>
                                     <th>Motifs</th>
-                                    <th>Name</th>
+                                    <th>Scientific Library(PubMed)</th>
                                     <th>Reverse Complement</th>
                                     <th>Vigna Genome</th>
                                     <th>Cluster</th>
@@ -190,10 +190,10 @@
 <script type="text/javascript">
     $.get("{% url 'api' %}", function(data) {
 
-    var margin = {'left': 100, 'right': 115, 'top': 10, 'bottom': 100};
+    var margin = {'left': 100, 'right': 120, 'top': 10, 'bottom': 100};
 
     var width = 1020 - margin.left - margin.right;
-    var height = 1200 - margin.top - margin.bottom;
+    var height = {{size}}*20 - margin.top - margin.bottom;
 
     var g = d3.select("#chart-area")
                 .append("svg")
@@ -213,7 +213,7 @@
             return d.promoter_id;
         }))
         .range([0, height])
-        .paddingInner(0.3)
+        .paddingInner(0)
         .paddingOuter(1);
 
     var x = d3.scaleLinear()
@@ -236,7 +236,7 @@
             .attr('y1', (d,i)=>y(d.promoter_id))
             .attr('x2', width)
             .attr('y2', (d,i)=>y(d.promoter_id))
-            .attr('stroke-width', 0.8)
+            .attr('stroke-width', 1)
             .attr('stroke', 'black');
 
 

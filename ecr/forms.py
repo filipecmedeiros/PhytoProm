@@ -5,17 +5,19 @@ import scipy.stats as stats
 
 from .models import Specie, Log, Background, Transcriptor
 import json
+from datetime import datetime
 
 class AnalyzeForm(forms.Form):
     specie = forms.ModelChoiceField(
         label='Specie', queryset=Specie.objects.all(), widget=forms.Select())
-    cluster = forms.CharField(label='Cluster', widget=forms.Textarea())
+    cluster = forms.CharField(label='Input locus ID', widget=forms.Textarea())
     cutoff = forms.FloatField(label='Cut off')
 
     def analyze(self):
         cluster = self.cleaned_data['cluster']
         cutoff = self.cleaned_data['cutoff']
         cluster = cluster.split('\r\n')
+        size = len(cluster)
 
         df = pd.DataFrame(list(Background.objects.all().values(
             'id', 'name', 'family', 'motifs', 'reverseComplement', 'vigna_genome')))
@@ -24,9 +26,6 @@ class AnalyzeForm(forms.Form):
         queryset = Log.objects.filter(promoter_id__in=cluster)
         log = pd.DataFrame(list(queryset.values(
             'promoter_id', 'tf', 'upstream', 'downstream', 'mean', 'sumatory')))
-
-        log.to_json(r'ecr/templates/data/analysis.json', orient='records')
-
 
         enrichment = log.groupby('tf').sum().reset_index()
 
@@ -56,12 +55,20 @@ class AnalyzeForm(forms.Form):
         enrichment = df.copy()
 
         enrichment = enrichment.loc[enrichment['p-value'] <= cutoff]
+        
+        now = datetime.now()
+        now = now.strftime('%Y%m%d%H%M%S')
+        graphic = pd.merge(log, enrichment, left_on='tf', right_on='id', how='inner')
+        graphic.to_json(r'ecr/templates/data/analysis.json', orient='records')
 
+        print ('SIZEEEEEEE:   ' + str(size))
         context = {
             'success': True,
             'dataframe':df.values.tolist(),
             'specie': self.cleaned_data['specie'],
             'log': list(queryset),
             'enrichment':enrichment.values.tolist(),
+            'size':size,
+            'now':now,
         }
         return context

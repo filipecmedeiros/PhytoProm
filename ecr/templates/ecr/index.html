@@ -130,7 +130,7 @@
                                         {% for row in list%}
                                             <td>
                                                 {% if forloop.counter == 4 %}
-                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}" target="_blank">
+                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
                                                 {% endif %}
                                                 {{ row }}
                                                 </a>
@@ -205,9 +205,9 @@
     
     data.forEach(function(d) {
         d.upstream = JSON.parse(d.upstream);
+        d.downstream = JSON.parse(d.downstream);
     });
     console.log(data);
-
     var y = d3.scaleBand()
         .domain(data.map(function(d){
             return d.promoter_id;
@@ -246,8 +246,9 @@
         .append("g")
         .attr("class", "circles");
 
+
     var circle = circleGroups.selectAll("circle")
-            .data(getCircleData)
+            .data(getCircleDataUp)
         .enter()
             .append("circle")
             .attr("cy", function(d){
@@ -262,12 +263,37 @@
             })
             .attr("stroke-width", 1)
             .attr("stroke", "black");
+    
+    var circle = circleGroups.selectAll("circle")
+            .data(getCircleDataDown)
+        .enter()
+            .append("circle")
+            .attr("cy", function(d){
+                return y(d.promoter_id)
+            })
+            .attr("cx", function(d){
+            return x(d.downstream)
+            })
+            .attr("r", 5)
+            .attr("fill", function(d) {
+                return color(motif(d.tf));
+            })
+            .attr("stroke-width", 1)
+            .attr("stroke", "black");
 
-    function getCircleData(d) {
+    function getCircleDataUp(d) {
         var cdata = d.upstream.map (function(ele) { 
             return {upstream: ele, promoter_id: d.promoter_id, tf:d.tf};
         });
-        
+
+        return cdata; 
+    }
+
+    function getCircleDataDown(d) {
+        var cdata = d.downstream.map (function(ele) { 
+            return {downstream: ele, promoter_id: d.promoter_id, tf:d.tf};
+        });
+
         return cdata; 
     }
 

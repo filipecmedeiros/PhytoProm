@@ -10,7 +10,7 @@ import json
 def index(request):
     success = False
 
-    form = AnalyzeForm(request.POST or None)
+    form = AnalyzeForm(request.POST or None, initial={'cutoff':0.05})
     context = {
         'title': 'Analyze',
         'form':form,
@@ -31,7 +31,7 @@ def api(request):
 def promoter(request):
     success = False
 
-    form = PromoterMiningForm(request.POST or None)
+    form = PromoterMiningForm(request.POST or None, initial={'size':1000})
     context = {
         'title':'Promoter Mining',
         'form':form,

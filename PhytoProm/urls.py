@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from ecr.views import index, api
+from ecr.views import index, api, promoter
 
 urlpatterns = [
     re_path(r'^$', index, name='index'),
     re_path(r'^api/$', api, name='api'),
+    re_path(r'^promoter/$', promoter, name='promoter'),
     path('admin/', admin.site.urls),
 ]

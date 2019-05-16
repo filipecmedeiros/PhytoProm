@@ -72,3 +72,41 @@ class AnalyzeForm(forms.Form):
             'now':now,
         }
         return context
+
+
+class PromoterMiningForm(forms.Form):
+    promoter = forms.CharField(label='PhytoMine Locus ID', widget=forms.Textarea())
+    size = forms.IntegerField(label='Promoter size (Max. 5000)', max_value=5000, min_value=1)
+
+
+    def mine (self):
+        promoters = self.cleaned_data['promoter']
+        size = self.cleaned_data['size']
+        promoters = promoters.split('\r\n')
+        promoters = {'id':promoters}
+        df = pd.DataFrame(promoters)
+        
+        from intermine.webservice import Service
+        service = Service("https://phytozome.jgi.doe.gov/phytomine/service")
+
+        query = service.new_query("Gene")
+
+        query.add_view(
+            "name", "primaryIdentifier", "secondaryIdentifier", "length",
+            "flankingRegions.length", "flankingRegions.includeGene",
+            "flankingRegions.direction", "flankingRegions.primaryIdentifier",
+            "flankingRegions.sequence.length", "flankingRegions.sequence.residues"
+        )
+
+        query.add_constraint("flankingRegions.length", "=", "5000", code = "A")
+        query.add_constraint("flankingRegions.includeGene", "=", "false", code = "B")
+        query.add_constraint("flankingRegions.direction", "=", "upstream", code = "C")
+        
+        output = ''
+        for i in df['id']:
+            query.add_constraint("name", "=", i, code = "D")
+            for row in query.rows():
+                output = output + (">"+str(row["primaryIdentifier"])+'\n'+\
+                                    str(row["flankingRegions.sequence.residues"][5000-size:])+'\n')
+
+        return output

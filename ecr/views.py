@@ -3,7 +3,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 from django.http import JsonResponse, Http404
 
-from .forms import AnalyzeForm
+from .forms import AnalyzeForm, PromoterMiningForm
 import json
 
 # Create your views here.
@@ -12,6 +12,7 @@ def index(request):
 
     form = AnalyzeForm(request.POST or None)
     context = {
+        'title': 'Analyze',
         'form':form,
         'success':success,
     }
@@ -26,3 +27,19 @@ def api(request):
     json_data=open(json_file)
     data = json.load(json_data)
     return JsonResponse(data, safe=False)
+
+def promoter(request):
+    success = False
+
+    form = PromoterMiningForm(request.POST or None)
+    context = {
+        'title':'Promoter Mining',
+        'form':form,
+        'success':success,
+    }
+
+    if form.is_valid():
+        context['promoters'] = form.mine()
+        context['success'] = True
+    
+    return render (request, 'ecr/promoter.html', context)

@@ -3,7 +3,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 from django.http import JsonResponse, Http404
 
-from .forms import AnalyzeForm, PromoterMiningForm
+from .forms import AnalyzeForm, PromoterMiningForm, MiningForm
 import json
 
 # Create your views here.
@@ -43,3 +43,35 @@ def promoter(request):
         context['success'] = True
     
     return render (request, 'ecr/promoter.html', context)
+
+def protein(request):
+    success = False
+
+    form = MiningForm(request.POST or None)
+    context = {
+        'title':'Protein Mining',
+        'form':form,
+        'success':success,
+    }
+
+    if form.is_valid():
+        context['output'] = form.mine(category="Protein")
+        context['success'] = True
+    
+    return render (request, 'ecr/mining.html', context)
+
+def transcript(request):
+    success = False
+
+    form = MiningForm(request.POST or None)
+    context = {
+        'title':'Transcript Mining',
+        'form':form,
+        'success':success,
+    }
+
+    if form.is_valid():
+        context['output'] = form.mine(category="Transcript")
+        context['success'] = True
+    
+    return render (request, 'ecr/mining.html', context)

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block 'container' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="row">
+    {% if not success %}
+        <div class="col-lg-6">
+        <form role="form" class="form-horizontal" action="" method="post">
+            <fieldset>
+                {% csrf_token %}
+                <div class="form-group" >
+                    {% for field in form %}
+                        <div class="form-group {% if field.errors %} has-errors {% endif %}">
+                          <label for="{{field.auto_id }}" class="col-md-3 control-label">{{ field.label }}</label>
+                          <div class="col-md-9">
+                            {% render_field field class='form-control' %}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{error}}</span>
+                            {% endfor %}
+                          </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                  <div class="col-md-9 col-md-offset-3">
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Run</button>
+                  </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {% else %}
+        <div class="col-lg-12">
+            <span class="promoters">{{output | linebreaks}}</span>
+        </div>
+    {%endif%}
+</div>
+
+{% endblock %}

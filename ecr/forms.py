@@ -110,3 +110,31 @@ class PromoterMiningForm(forms.Form):
                                     str(row["flankingRegions.sequence.residues"][5000-size:])+'\n')
 
         return output
+
+
+class MiningForm(forms.Form):
+    locus_id = forms.CharField(label='PhytoMine Locus ID', widget=forms.Textarea())
+
+    def mine (self, category):
+        locus_id = self.cleaned_data['locus_id']
+        locus_id = locus_id.split('\r\n')
+        locus_id = {'id':locus_id}
+        df = pd.DataFrame(locus_id)
+        
+        from intermine.webservice import Service
+        service = Service("https://phytozome.jgi.doe.gov/phytomine/service")
+
+        query = service.new_query(category)
+
+        query.add_view(
+            "name", "primaryIdentifier", "secondaryIdentifier", "sequence.residues"
+        )
+        
+        output = ''
+        for i in df['id']:
+            query.add_constraint("name", "=", i, code = "D")
+            for row in query.rows():
+                output = output + (">"+str(row["primaryIdentifier"])+'\n'+\
+                                    row["sequence.residues"]+'\n')
+
+        return output

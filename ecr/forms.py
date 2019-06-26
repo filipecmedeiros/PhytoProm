@@ -14,13 +14,18 @@ class AnalyzeForm(forms.Form):
     cutoff = forms.FloatField(label='Cut off')
 
     def analyze(self):
+        specie = self.cleaned_data['specie']
         cluster = self.cleaned_data['cluster']
         cutoff = self.cleaned_data['cutoff']
         cluster = cluster.split('\r\n')
         size = len(cluster)
+        specie = specie.id.split(' ')[0]
+        specie = specie.lower()
+        specie = specie+'_genome'
 
         df = pd.DataFrame(list(Background.objects.all().values(
-            'id', 'name', 'family', 'motifs', 'reverseComplement', 'vigna_genome')))
+            'id', 'name', 'family', 'motifs', 'reverseComplement', specie)))
+
         df['cluster'] = 0
 
         queryset = Log.objects.filter(promoter_id__in=cluster)
@@ -44,12 +49,16 @@ class AnalyzeForm(forms.Form):
 
         df['cluster'] = enrichment['sumatory']
 
-        vigna_genome = df.vigna_genome.sum()
+        if (specie == 'vigna_genome'):
+            genome = df.vigna_genome.sum()
+        elif (specie == 'glycine_genome'):
+            genome =df.glycine_genome.sum()
+
         cluster = df.cluster.sum()
 
         df['p-value'] = 0
         df['p-value'] = df.apply(lambda x: stats.fisher_exact(
-            [[x['vigna_genome'], x['cluster']], [vigna_genome, cluster]])[1], axis=1)
+            [[x[specie], x['cluster']], [genome, cluster]])[1], axis=1)
 
 
         enrichment = df.copy()
@@ -61,7 +70,6 @@ class AnalyzeForm(forms.Form):
         graphic = pd.merge(log, enrichment, left_on='tf', right_on='id', how='inner')
         graphic.to_json(r'ecr/templates/data/analysis.json', orient='records')
 
-        print ('SIZEEEEEEE:   ' + str(size))
         context = {
             'success': True,
             'dataframe':df.values.tolist(),

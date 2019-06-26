@@ -97,6 +97,8 @@ class Background(models.Model):
     reverseComplement = models.CharField(
         'Complemento reverso', max_length=10000, null=False, blank=False)
     vigna_genome = models.IntegerField('Genoma de Vigna')
+    glycine_genome = models.IntegerField('Genoma de Glycine')
+    vitis_genome = models.IntegerField('Genoma de Glycine')
 
     class Meta:
         verbose_name = 'Background'

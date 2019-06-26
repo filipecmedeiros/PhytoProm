@@ -30,7 +30,7 @@ class LogAdmin(admin.ModelAdmin):
 	filter_list = ['promoter_id', 'tf_id']
 
 class BackgroundAdmin(admin.ModelAdmin):
-	list_display = ['id', 'name', 'motifs', 'reverseComplement', 'vigna_genome']
+	list_display = ['id', 'name', 'motifs', 'reverseComplement', 'vigna_genome', 'glycine_genome']
 	search_list = ['id', 'name', 'motifs', 'reverseComplement']
 	filter_list = ['id', 'name']
 

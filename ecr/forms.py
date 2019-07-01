@@ -53,6 +53,8 @@ class AnalyzeForm(forms.Form):
             genome = df.vigna_genome.sum()
         elif (specie == 'glycine_genome'):
             genome =df.glycine_genome.sum()
+        elif (specie == 'vitis_genome'):
+            genome =df.vitis_genome.sum()
 
         cluster = df.cluster.sum()
 

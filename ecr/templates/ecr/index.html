@@ -75,11 +75,11 @@
                                     <th>Family</th>
                                     <th>ID</th>
                                     <th>Motifs</th>
-                                    <th>Scientific Library(PubMed)</th>
+                                    <th>Scientific Library</th>
                                     <th>Reverse Complement</th>
-                                    <th>Vigna Genome</th>
+                                    <th>{{ specie }} Genome</th>
                                     <th>Cluster</th>
-                                    <th>p-value</th>
+                                    <th>Fisher's exact test</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,10 +88,17 @@
                                         {% for row in list%}
                                             <td>
                                                 {% if forloop.counter == 4 %}
+                                                    {{ row }}<br/>
                                                     <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        PubMed    
+                                                    </a><br/>
+                                                    <a href="https://scholar.google.com.br/scholar?hl=en&as_sdt=0%2C5&q=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        Google Scholar
+                                                    </a><br/>
+                                                {% else %}
+                                                    {{ row }}
                                                 {% endif %}
-                                                {{ row }}
-                                                </a>
+                                                
                                             </td>
                                         {% endfor%}
                                     </tr>
@@ -117,11 +124,11 @@
                                     <th>Family</th>
                                     <th>ID</th>
                                     <th>Motifs</th>
-                                    <th>Scientific Library(PubMed)</th>
+                                    <th>Scientific Library</th>
                                     <th>Reverse Complement</th>
-                                    <th>Vigna Genome</th>
+                                    <th>{{ specie }} Genome</th>
                                     <th>Cluster</th>
-                                    <th>p-value</th>
+                                    <th>Fisher's exact test</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,10 +137,17 @@
                                         {% for row in list%}
                                             <td>
                                                 {% if forloop.counter == 4 %}
+                                                    {{ row }}<br/>
                                                     <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        PubMed    
+                                                    </a><br/>
+                                                    <a href="https://scholar.google.com.br/scholar?hl=en&as_sdt=0%2C5&q=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        Google Scholar
+                                                    </a><br/>
+                                                {% else %}
+                                                    {{ row }}
                                                 {% endif %}
-                                                {{ row }}
-                                                </a>
+                                                
                                             </td>
                                         {% endfor%}
                                     </tr>

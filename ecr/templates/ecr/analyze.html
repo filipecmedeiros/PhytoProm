@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+
+{% block 'container' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+    {% if not success %}
+        <div class="col-lg-6">
+        <form role="form" class="form-horizontal" action="" method="post">
+            <fieldset>
+                {% csrf_token %}
+                <div class="form-group" >
+                    {% for field in form %}
+                        <div class="form-group {% if field.errors %} has-errors {% endif %}">
+                          <label for="{{field.auto_id }}" class="col-md-3 control-label">{{ field.label }}</label>
+                          <div class="col-md-9">
+                            {% render_field field class='form-control' %}
+                            {% if field.label == 'Specie' %}
+                                {% for choice in form.CHOICES %}
+                                    <option value="{{ choice }}">{{ choice }}</option>
+                                {% endfor %}
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{error}}</span>
+                            {% endfor %}
+                          </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                  <div class="col-md-9 col-md-offset-3">
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Run</button>
+                  </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {% else %}
+        <div class="col-lg-12">
+            <div class="row">
+                <div id="chart-area"></div>
+            </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseEnriched" role="button" aria-expanded="true" aria-controls="collapseLog">
+                Enriched Cis-Elements
+            </a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseCis" role="button" aria-expanded="false" aria-controls="collapseCis">
+                General Cis-Element list's
+            </a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseLog" role="button" aria-expanded="false" aria-controls="collapseLog">
+                PhytoProm Log result
+            </a>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="collapse" id="collapseEnriched">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Enriched Cis-Element list's with data analysis:
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <!-- {{ dataframe | safe }} -->
+
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Family</th>
+                                    <th>ID</th>
+                                    <th>Motifs</th>
+                                    <th>Scientific Library</th>
+                                    <th>Reverse Complement</th>
+                                    <th>{{ specie }} Genome</th>
+                                    <th>Cluster</th>
+                                    <th>Fisher's exact test</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for list in enrichment %}
+                                    <tr class="">
+                                        {% for row in list%}
+                                            <td>
+                                                {% if forloop.counter == 4 %}
+                                                    {{ row }}<br/>
+                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        PubMed    
+                                                    </a><br/>
+                                                    <a href="https://scholar.google.com.br/scholar?hl=en&as_sdt=0%2C5&q=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        Google Scholar
+                                                    </a><br/>
+                                                {% else %}
+                                                    {{ row }}
+                                                {% endif %}
+                                                
+                                            </td>
+                                        {% endfor%}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapse" id="collapseCis">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        General Cis-Element list's with data analysis:
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <!-- {{ dataframe | safe }} -->
+
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Family</th>
+                                    <th>ID</th>
+                                    <th>Motifs</th>
+                                    <th>Scientific Library</th>
+                                    <th>Reverse Complement</th>
+                                    <th>{{ specie }} Genome</th>
+                                    <th>Cluster</th>
+                                    <th>Fisher's exact test</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for list in dataframe %}
+                                    <tr class="">
+                                        {% for row in list%}
+                                            <td>
+                                                {% if forloop.counter == 4 %}
+                                                    {{ row }}<br/>
+                                                    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        PubMed    
+                                                    </a><br/>
+                                                    <a href="https://scholar.google.com.br/scholar?hl=en&as_sdt=0%2C5&q=PLANT+STRESS+AND+{{row}}+TRANSCRIPTION+FACTOR" target="_blank">
+                                                        Google Scholar
+                                                    </a><br/>
+                                                {% else %}
+                                                    {{ row }}
+                                                {% endif %}
+                                                
+                                            </td>
+                                        {% endfor%}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="collapse" id="collapseLog">
+                    <div class="panel-heading">
+                        PhytoProm Log result:
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Promoter</th>
+                                    <th>Cis-Element</th>
+                                    <th>Upstream</th>
+                                    <th>Downstream</th>
+                                    <th>Mean</th>
+                                    <th>Sumatory</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in log %}
+                                    <tr class="">
+                                        <td>{{ row.promoter_id }}</a></td>
+                                        <td>{{ row.tf }}</td>
+                                        <td>{{ row.upstream }}</td>
+                                        <td>{{ row.downstream }}</td>
+                                        <td class="center">{{ row.mean }}</td>
+                                        <td class="center">{{ row.sumatory }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+    $.get("{% url 'api' %}", function(data) {
+
+    var margin = {'left': 100, 'right': 120, 'top': 10, 'bottom': 100};
+
+    var width = 1020 - margin.left - margin.right;
+    var height = {{size}}*20 - margin.top - margin.bottom;
+
+    var g = d3.select("#chart-area")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(" + margin.left 
+                    + ", " + margin.top + ")")
+    
+    data.forEach(function(d) {
+        d.upstream = JSON.parse(d.upstream);
+        d.downstream = JSON.parse(d.downstream);
+    });
+    console.log(data);
+    var y = d3.scaleBand()
+        .domain(data.map(function(d){
+            return d.promoter_id;
+        }))
+        .range([0, height])
+        .paddingInner(0)
+        .paddingOuter(1);
+
+    var x = d3.scaleLinear()
+        .domain([0,1000])
+        .range([0,width]);
+    
+    var color = d3.scaleSequential(d3.interpolateRainbow);
+    var motif = d3.scaleBand()
+        .domain(data.map(function(d){
+            return d.tf;
+        }))
+        .range([0,1]);
+
+    var line = g.selectAll("line")
+        .data(data);
+
+    line.enter()
+        .append('line')
+            .attr('x1', 0)
+            .attr('y1', (d,i)=>y(d.promoter_id))
+            .attr('x2', width)
+            .attr('y2', (d,i)=>y(d.promoter_id))
+            .attr('stroke-width', 1)
+            .attr('stroke', 'black');
+
+
+    var circleGroups = g.selectAll("g.circles")
+    .data(data)
+        .enter()
+        .append("g")
+        .attr("class", "circles");
+
+
+    var circle = circleGroups.selectAll("circle")
+            .data(getCircleDataUp)
+        .enter()
+            .append("circle")
+            .attr("cy", function(d){
+                return y(d.promoter_id)
+            })
+            .attr("cx", function(d){
+            return x(d.upstream)
+            })
+            .attr("r", 5)
+            .attr("fill", function(d) {
+                return color(motif(d.tf));
+            })
+            .attr("stroke-width", 1)
+            .attr("stroke", "black");
+    
+    var circle = circleGroups.selectAll("circle")
+            .data(getCircleDataDown)
+        .enter()
+            .append("circle")
+            .attr("cy", function(d){
+                return y(d.promoter_id)
+            })
+            .attr("cx", function(d){
+            return x(d.downstream)
+            })
+            .attr("r", 5)
+            .attr("fill", function(d) {
+                return color(motif(d.tf));
+            })
+            .attr("stroke-width", 1)
+            .attr("stroke", "black");
+
+    function getCircleDataUp(d) {
+        var cdata = d.upstream.map (function(ele) { 
+            return {upstream: ele, promoter_id: d.promoter_id, tf:d.tf};
+        });
+
+        return cdata; 
+    }
+
+    function getCircleDataDown(d) {
+        var cdata = d.downstream.map (function(ele) { 
+            return {downstream: ele, promoter_id: d.promoter_id, tf:d.tf};
+        });
+
+        return cdata; 
+    }
+
+    var yAxisGroup = d3.selectAll('svg').append('g')
+                           .attr('class','yAxis')
+                           .attr('transform','translate(' + margin.left + ', 0)');
+    var yAxis = d3.axisLeft(y);
+    yAxisGroup.call(yAxis);
+
+
+    var xAxisGroup = d3.selectAll('svg').append('g')
+                           .attr('class','xAxis')
+                           .attr('transform','translate('+margin.left+','+height+')');
+    var xAxis = d3.axisBottom(x);
+    xAxisGroup.call(xAxis);
+
+    var legendScale = d3.scaleBand()
+                        .domain(data.map(d=>d.tf))
+                        .range([0, height]);
+
+    var legend = d3.selectAll('svg').append("g")
+        .attr("class", "legend")
+        .attr("x", width+margin.left + 15)
+        .attr("y", 50)
+        .attr("height", height)
+        .attr("width", 100);
+    
+    var legend = legend.selectAll(".legend")
+                .data(data)
+                .enter();
+
+    legend.append("circle")
+            .attr("cx", width + margin.left + 25)
+            .attr("cy", d=>legendScale(d.tf)+25)
+            .attr("r", 5)
+            .style("fill", function(d) {
+                return color(motif(d.tf));
+            });
+    
+    legend.append("text")
+        .attr("x", width + margin.left + 45)
+        .attr("y", d=>legendScale(d.tf)+30)
+        .text(d=>d.tf)
+        .attr("font-weight", "bold");
+    });
+</script>
+
+{% endblock %}

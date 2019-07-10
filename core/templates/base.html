@@ -13,7 +13,7 @@
     <title>PhytoProm</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
@@ -27,6 +27,7 @@
     <!-- Custom Fonts -->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
+    <link href="{% static 'vendor/custom.css' %}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,77 +38,117 @@
 </head>
 
 <body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'index' %}">PhytoProm v1.0</a>
+    <div class="container">
+      <div class="pull-left logo hidden-sm hidden-md hidden-xs">
+        <a href=""><img class="img-responsive" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="navbar navbar-default">
+        <div class="container">
+            <div class="pull-left hidden-lg">
+              <a href=""><img class="img-responsive" style="max-width:100px;" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
             </div>
-
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-book fa-fw"></i> Documentation</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'promoter' %}"><i class="fa fa-align-left fa-fw"></i> Promoter Mining</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'protein' %}"><i class="fa fa-sort-amount-desc fa-fw"></i> Protein Mining</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'transcript' %}"><i class="fa fa-th fa-fw"></i> Transcript Mining</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'index' %}"><i class="fa fa-bar-chart-o fa-fw"></i> Analysis Exploratory</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">{{title}}</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-                {% block 'container' %}
-                {% endblock%}
-            <!-- /.row -->
-            </div>
-            <!-- /.row -->
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
-        <!-- /#page-wrapper -->
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+                <li class="top-menu">
+                    <a href="{% url 'index' %}">
+                        <i class="fa fa-bar-chart-o fa-fw"></i>
+                        <span> Exploratory Analysis</span>
+                    </a>
+                </li>
+                <li class="top-menu">
+                    <a href="{% url 'promoter' %}">
+                        <i class="fa fa-align-left fa-fw"></i>
+                        <span> Promoter Download</span>
+                    </a>
+                </li>
+                <li class="top-menu">
+                    <a href="{% url 'transcript' %}">
+                        <i class="fa fa-th fa-fw"></i>
+                        <span> Transcript Mining</span>
+                    </a>
+                </li>
+                <li class="top-menu">
+                    <a href="{% url 'protein' %}">
+                        <i class="fa fa-sort-amount-desc fa-fw"></i>
+                        <span> Protein Mining</span>
+                    </a>
+                </li>
+                <li class="top-menu">
+                    <a href="#">
+                        <i class="fa fa-book fa-fw"></i> 
+                        <span> Documentation</span>
+                    </a>
+                </li>
+                <li class="top-menu">
+                    <a href="#">
+                        <i class="fa fa-book fa-fw"></i> 
+                        <span> Suggestions</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+      {% block 'container' %}
+      {% endblock %}
+    </div>
 
     </div>
     <!-- /#wrapper -->
-
+    {% block footer %}
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer">
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <ul class="nav flex-column footer-list">
+              <li class="nav-item"><a href="">TIMES</a></li>
+              <li class="nav-item"><a href="">1º Divisão</a></li>
+              <li class="nav-item"><a href="">2º Divisão</a></li>
+              <li class="nav-item"><a href="">Outros</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <ul class="nav flex-column footer-list">
+              <li class="nav-item"><a href="">NOTÍCIAS</a></li>
+              <li class="nav-item"><a href="">Últimas</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <ul class="nav flex-column footer-list">
+              <li class="nav-item"><a href="">CAMPEONATO</a></li>
+              <li class="nav-item"><a href="">1º Divisão</a></li>
+              <li class="nav-item"><a href="">2º Divisão</a></li>
+              <li class="nav-item"><a href="">Estaduais</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <ul class="nav flex-column footer-list">
+              <li class="nav-item"><a href="">CONTATO</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+          </div> 
+        </div>
+          <br/>
+          <br/>
+          <br/>
+          <div class="row">
+            <h3 class="copyright">Copyright 2017-2018-2019 FABR Network, Haim Ferreira e Filipe Medeiros | Todos os direitos reservados</h3>
+          </div>
+      </div>
+    {% endblock %}
     <!-- jQuery -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 

@@ -1,0 +1,107 @@
+body {
+    padding-top:50px;
+    /*background-image: url("/static/img/wallpaper.png");*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#espelhar{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.top-menu > a > img{
+    height: 55px;
+    width: 55px;
+    margin: 3px;
+    display: block;
+}
+
+.navbar-nav > li{
+    background: #CED8DB !important;
+}
+
+.home-slide{
+    max-height: 410px;
+}
+
+.home-slide > a > span{
+    margin-top: 10px;
+}
+
+.manutencao{
+    max-height: 600px;
+    margin:auto;
+    display: block;
+}
+
+#banner{
+    border-bottom:none
+}
+
+.footer{
+    margin-top: 40px;
+}
+
+.fabr-logo-gray{
+    -webkit-filter: invert(1);
+    max-width: 150px;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+hr{
+    border: 1;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255,255,255, 1), rgba(0, 0, 0, 0));
+    max-width: 35%;
+}
+
+
+.footer-list > li{
+    text-decoration: none;
+    text-align: center;
+    color: #333333;
+    font-family: opensans light, sans-serif;
+}
+
+.footer-list > li:first-child{
+    font-family: opensans bold, sans-serif;
+    color: #333333;
+}
+
+.footer-list > li > a{
+    color: #333333;
+}
+.footer-list > li > a:hover,
+.footer-list > li > a:focus{
+    color: #94e204;
+    background-color: #1D1D21;
+}
+
+.copyright{
+    font-family: opensans bold, sans-serif;
+    color: white;
+    font-size: 8pt;
+    text-align: center;   
+    text-transform: uppercase;
+}
+
+
+.navbar-nav {
+    display: flex;
+    align-items: stretch; /* Default */
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.navbar-nav > li {
+    display: block;
+    flex: 0 1 auto; /* Default */
+    list-style-type: none;
+    background: #fafafa;
+}

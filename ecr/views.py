@@ -8,6 +8,9 @@ import json
 
 # Create your views here.
 def index(request):
+    return render(request, 'ecr/index.html')
+
+def analyze(request):
     success = False
 
     form = AnalyzeForm(request.POST or None, initial={'cutoff':0.05})
@@ -20,7 +23,7 @@ def index(request):
     if form.is_valid():
         context = form.analyze()
     
-    return render (request, 'ecr/index.html', context)
+    return render (request, 'ecr/analyze.html', context)
 
 def api(request):
     json_file = 'ecr/templates/data/analysis.json'

@@ -16,75 +16,83 @@ body {
 .top-menu > a > img{
     height: 55px;
     width: 55px;
-    margin: 3px;
+    margin: auto;
     display: block;
+    text-align: center;
 }
 
 .navbar-nav > li{
-    background: #CED8DB !important;
+    background: white !important;
+    border: solid 1px #373737;
+    border-radius: 15px;
+    width: 120px;
 }
 
-.home-slide{
-    max-height: 410px;
+.navbar-nav > li > a{
+    padding:10px;
 }
 
-.home-slide > a > span{
-    margin-top: 10px;
+.navbar-default .navbar-nav > li > a{
+    color: #373737;
+    font-family: opensans bold;
+    letter-spacing:-1px;
+    font-size: 10pt;
+    text-align: center;
 }
 
-.manutencao{
-    max-height: 600px;
-    margin:auto;
+.middle{
+    padding-top:50px;
     display: block;
 }
 
-#banner{
-    border-bottom:none
+.home > img{
+    max-width: 450px;
+    display: block;
+    float:left;
+    margin-right:20px;
 }
+.home > p{
+    padding:15px;
+    font-size: 10pt;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.tab {margin-left:25px; }
 
 .footer{
     margin-top: 40px;
 }
 
-.fabr-logo-gray{
-    -webkit-filter: invert(1);
-    max-width: 150px;
-    margin-top:20px;
-    margin-bottom: 20px;
+.footer > a > img{
+    max-width: 50px;
+    margin:auto;
 }
 
 hr{
     border: 1;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255,255,255, 1), rgba(0, 0, 0, 0));
-    max-width: 35%;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0,0,0, 1), rgba(255, 255, 255, 0));
+    max-width: 45%;
 }
-
 
 .footer-list > li{
     text-decoration: none;
     text-align: center;
-    color: #333333;
-    font-family: opensans light, sans-serif;
-}
-
-.footer-list > li:first-child{
+    color: #373737;
     font-family: opensans bold, sans-serif;
-    color: #333333;
 }
 
 .footer-list > li > a{
-    color: #333333;
+    color: #373737;
 }
 .footer-list > li > a:hover,
 .footer-list > li > a:focus{
-    color: #94e204;
-    background-color: #1D1D21;
+    color: #A2CF6F;
 }
 
 .copyright{
     font-family: opensans bold, sans-serif;
-    color: white;
+    color: #373737;
     font-size: 8pt;
     text-align: center;   
     text-transform: uppercase;
@@ -103,5 +111,36 @@ hr{
     display: block;
     flex: 0 1 auto; /* Default */
     list-style-type: none;
-    background: #fafafa;
 }
+
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color: transparent;
+}
+/* =============== Fonts =========================*/
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('../fonts/BebasNeue-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans Light';
+  src: url('../fonts/OpenSans-Light.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans Regular';
+  src: url('../fonts/OpenSans-Regular.ttf');
+}
+@font-face {
+  font-family: 'OpenSans Semibold';
+  src: url('../fonts/OpenSans-Semibold.ttf');
+}
+@font-face {
+  font-family: 'OpenSans Bold';
+  src: url('../fonts/OpenSans-Bold.ttf');
+}
+@font-face {
+  font-family: 'OpenSans ExtraBold';
+  src: url('../fonts/OpenSans-ExtraBold.ttf');
+}
+/* ================== End fonts ====================*/

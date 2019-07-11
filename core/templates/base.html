@@ -40,14 +40,14 @@
 <body>
     <div class="container">
       <div class="pull-left logo hidden-sm hidden-md hidden-xs">
-        <a href=""><img class="img-responsive" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
+        <a href="{% url 'index' %}"><img class="img-responsive" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
       </div>
     </div>
     <div class="container">
       <div class="navbar navbar-default">
         <div class="container">
             <div class="pull-left hidden-lg">
-              <a href=""><img class="img-responsive" style="max-width:100px;" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
+              <a href="{% url 'index' %}"><img class="img-responsive" style="max-width:100px;" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
             </div>
         <div class="navbar-header">
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -59,38 +59,38 @@
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li class="top-menu">
-                    <a href="{% url 'index' %}">
-                        <i class="fa fa-bar-chart-o fa-fw"></i>
+                    <a href="{% url 'analyze' %}">
+                        <img src="{% static 'img/exploratory.png' %}">
                         <span> Exploratory Analysis</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'promoter' %}">
-                        <i class="fa fa-align-left fa-fw"></i>
+                        <img src="{% static 'img/promoter.png' %}">
                         <span> Promoter Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'transcript' %}">
-                        <i class="fa fa-th fa-fw"></i>
-                        <span> Transcript Mining</span>
+                        <img src="{% static 'img/transcript.png' %}">
+                        <span> Transcript Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'protein' %}">
-                        <i class="fa fa-sort-amount-desc fa-fw"></i>
-                        <span> Protein Mining</span>
+                        <img src="{% static 'img/protein.png' %}">
+                        <span> Protein Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="#">
-                        <i class="fa fa-book fa-fw"></i> 
+                        <img src="{% static 'img/documentation.png' %}">
                         <span> Documentation</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="#">
-                        <i class="fa fa-book fa-fw"></i> 
+                        <img src="{% static 'img/suggestions.png' %}">
                         <span> Suggestions</span>
                     </a>
                 </li>
@@ -109,45 +109,45 @@
     {% block footer %}
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer">
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-            <ul class="nav flex-column footer-list">
-              <li class="nav-item"><a href="">TIMES</a></li>
-              <li class="nav-item"><a href="">1º Divisão</a></li>
-              <li class="nav-item"><a href="">2º Divisão</a></li>
-              <li class="nav-item"><a href="">Outros</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-            <ul class="nav flex-column footer-list">
-              <li class="nav-item"><a href="">NOTÍCIAS</a></li>
-              <li class="nav-item"><a href="">Últimas</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-            <ul class="nav flex-column footer-list">
-              <li class="nav-item"><a href="">CAMPEONATO</a></li>
-              <li class="nav-item"><a href="">1º Divisão</a></li>
-              <li class="nav-item"><a href="">2º Divisão</a></li>
-              <li class="nav-item"><a href="">Estaduais</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-            <ul class="nav flex-column footer-list">
-              <li class="nav-item"><a href="">CONTATO</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-          </div> 
+            <hr>
+            <h3 class="copyright">Powered by:</h3>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="footer">
+                    <a href="https://www.ufpe.br/"><img class="img-responsive" src="{% static 'img/ufpe.png' %}"></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="footer">
+                    <a href="https://www.ufpe.br/"><img class="img-responsive" src="{% static 'img/ufpe.png' %}"></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="footer">
+                    <a href="https://www.ufpe.br/"><img class="img-responsive" src="{% static 'img/ufpe.png' %}"></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="footer">
+                    <a href="https://www.ufpe.br/"><img class="img-responsive" src="{% static 'img/ufpe.png' %}"></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div> 
         </div>
-          <br/>
-          <br/>
-          <br/>
-          <div class="row">
-            <h3 class="copyright">Copyright 2017-2018-2019 FABR Network, Haim Ferreira e Filipe Medeiros | Todos os direitos reservados</h3>
-          </div>
-      </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+            <ul class="nav flex-column footer-list">
+                <li class="nav-item"><a href="">Filipe Cordeiro de Medeiros Azevêdo - Computer Scientist</a></li>
+                <li class="nav-item"><a href="">José Ribamar Neto - PhD associated</a></li>
+                <li class="nav-item"><a href="">Ana Benko - Project Coordinator</a></li>
+            </ul>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+    </div>
     {% endblock %}
     <!-- jQuery -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

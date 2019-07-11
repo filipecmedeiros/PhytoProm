@@ -7,7 +7,9 @@
 
 <div class="row">
     {% if not success %}
-        <div class="col-lg-6">
+    <div class="middle"></div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
         <form role="form" class="form-horizontal" action="" method="post">
             <fieldset>
                 {% csrf_token %}
@@ -33,6 +35,7 @@
             </fieldset>
         </form>
     </div>
+    <div class="col-lg-3"></div>
     {% else %}
         <div class="col-lg-12">
             <span class="promoters">{{promoters | linebreaks}}</span>

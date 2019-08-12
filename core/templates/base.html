@@ -26,7 +26,8 @@
 
     <!-- Custom Fonts -->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-
+    <script defer src="{% static 'fontawesome/js/all.min.js' %}"></script>
+    <link href="{% static 'vendor/theme.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/custom.css' %}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,6 +39,25 @@
 </head>
 
 <body>
+    <header class="header fixed-top">       
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+                    <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon mr-2" src="{% static 'img/coderdocs-logo.svg' %}" alt="logo"><span class="logo-text">Coder<span class="text-alt">Docs</span></span></a></div>    
+                </div><!--//docs-logo-wrapper-->
+                <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+    
+                    <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-4-documentation-template-for-software-projects/" class="btn btn-primary d-none d-lg-flex">Download</a>
+                </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
     <div class="container">
       <div class="pull-left logo hidden-sm hidden-md hidden-xs">
         <a href="{% url 'index' %}"><img class="img-responsive" src="{% static 'img/logo.png' %}" style="height:100px; margin-bottom:10px;"></a>
@@ -60,37 +80,31 @@
             <ul class="nav navbar-nav">
                 <li class="top-menu">
                     <a href="{% url 'analyze' %}">
-                        <img src="{% static 'img/exploratory.png' %}">
                         <span> Exploratory Analysis</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'promoter' %}">
-                        <img src="{% static 'img/promoter.png' %}">
                         <span> Promoter Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'transcript' %}">
-                        <img src="{% static 'img/transcript.png' %}">
                         <span> Transcript Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="{% url 'protein' %}">
-                        <img src="{% static 'img/protein.png' %}">
                         <span> Protein Download</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="#">
-                        <img src="{% static 'img/documentation.png' %}">
                         <span> Documentation</span>
                     </a>
                 </li>
                 <li class="top-menu">
                     <a href="#">
-                        <img src="{% static 'img/suggestions.png' %}">
                         <span> Suggestions</span>
                     </a>
                 </li>

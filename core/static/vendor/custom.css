@@ -56,11 +56,17 @@ body {
     font-size: 10pt;
     text-align: justify;
     text-justify: inter-word;
+    color: white;
 }
 .tab {margin-left:25px; }
 
 .footer{
-    margin-top: 40px;
+    max-width: 200px;
+    margin: auto;
+    display: inline;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 15px;
 }
 
 .footer > a > img{
@@ -75,6 +81,9 @@ hr{
     max-width: 45%;
 }
 
+.footer-list{
+    margin-top: 45px; 
+}
 .footer-list > li{
     text-decoration: none;
     text-align: center;

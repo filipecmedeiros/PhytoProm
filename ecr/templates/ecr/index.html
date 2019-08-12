@@ -1,12 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
 {% block 'container' %}
 
 {% load static %}
 {% load widget_tweaks %}
-
-<div class="col-lg-1"></div>
-<div class="col-lg-10">
     <div class="home">
         <img class="img-responsive" src="{% static 'img/example.png' %}">
         <p><span class="tab">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
@@ -25,8 +22,4 @@
         et ea rebum. Stet clita kasd gubergren, no sea takimata 
         sanctus est.</p>
     </div>
-    
-
-</div>
-<div class="col-lg-1"></div>
 {% endblock %}

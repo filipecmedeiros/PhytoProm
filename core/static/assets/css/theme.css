@@ -168,13 +168,13 @@ sup {
 }
 
 a {
-    color: #28b76b;
+    color: #009DD1;
     text-decoration: none;
     background-color: transparent
 }
 
 a:hover {
-    color: #1a7846;
+    color: #396C9D;
     text-decoration: underline
 }
 
@@ -623,8 +623,6 @@ pre code {
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px
 }
 
 .no-gutters {

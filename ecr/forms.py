@@ -73,6 +73,7 @@ class AnalyzeForm(forms.Form):
         graphic.to_json(r'ecr/templates/data/analysis.json', orient='records')
 
         context = {
+            'title': 'Exploratory Analysis',
             'success': True,
             'dataframe':df.values.tolist(),
             'specie': self.cleaned_data['specie'],

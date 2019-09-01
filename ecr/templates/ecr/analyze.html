@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
+{% block index %}
+    <div class="text-center">
+        <h4 style="color:#fff"> {{ title }} </h4>
+    </div>
+{% endblock %}
+
 {% block container %}
 
 {% load static %}
-{% load widget_tweaks %}
+{% load widget_tweaks %}  
 <div class="middle"></div>
 <div class="row">
 <div class="col-lg-3"></div>
     {% if not success %}
         <div class="col-lg-6">
-        <form role="form" class="form-horizontal" action="" method="post">
+        <form id="myform" role="form" class="form-horizontal" action="" method="post">
             <fieldset>
                 {% csrf_token %}
                 <div class="form-group" >

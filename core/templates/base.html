@@ -25,7 +25,10 @@
 
 </head> 
 
-<body>    
+<body>
+<div id="pageloader">
+    <img id="loading-image" style="max-width: 300px;" src="{% static 'img/loading.gif' %}" alt="Loading..." />
+</div>  
     <header class="header fixed-top">       
         <div class="branding docs-branding">
             <div class="container-fluid position-relative py-2">
@@ -95,30 +98,42 @@
             <small class="copyright">Powered by:</small>
             <ul class="list-inline">
                 <li class="list-inline-item">
-                    <a href="https://www.ufpe.br/">
+                    <a href="https://www.ufpe.br/" target="_blank">
                         <img class="img-responsive footer" src="{% static 'img/ufpe.png' %}">
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="https://www.ufpe.br/">
-                        <img class="img-responsive footer" src="{% static 'img/ufpe.png' %}">
+                    <a href="https://www.capes.gov.br/" target="_blank">
+                        <img class="img-responsive footer" src="{% static 'img/capes.png' %}">
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="https://www.ufpe.br/">
-                        <img class="img-responsive footer" src="{% static 'img/ufpe.png' %}">
+                    <a href="http://renabic.imd.ufrn.br/rede/intersis/" target="_blank">
+                        <img class="img-responsive footer" style="max-width:250px"style="max-width:250px"  src="{% static 'img/intensis.jpg' %}">
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="https://www.ufpe.br/">
-                        <img class="img-responsive footer" src="{% static 'img/ufpe.png' %}">
+                    <a href="http://www.lgbv-ufpe.net/index.php" target="_blank">
+                        <img class="img-responsive footer" style="max-width:250px" src="{% static 'img/lgbv.png' %}">
                     </a>
                 </li>
             </ul>
                 <ul class="nav flex-column footer-list">
-                    <li class="nav-item"><a href="">Filipe Cordeiro de Medeiros Azevêdo - Computer Scientist</a></li>
-                    <li class="nav-item"><a href="">José Ribamar Neto - PhD associated</a></li>
-                    <li class="nav-item"><a href="">Ana Benko - Project Coordinator</a></li>
+                    <li class="nav-item">
+                        <a href="https://www.linkedin.com/in/filipecmedeiros/" target="_blank">
+                            Filipe Cordeiro de Medeiros Azevêdo - Computer Scientist
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4745831D1" target="_blank">
+                            José Ribamar Costa Ferreira Neto - PhD associated
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4799821J7" target="_blank">
+                            Ana Maria Benko-Iseppon - Project Coordinator
+                        </a>
+                    </li>
                 </ul>
                 <br/>
                 <br/>
@@ -132,8 +147,21 @@
     <script src="{% static 'assets/plugins/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'assets/plugins/popper.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>  
-    <script src="{% static 'js/d3.min.js' %}"></script>  
+    <script src="{% static 'js/d3.min.js' %}"></script>
 
+    <script language="javascript" type="text/javascript">
+        window.onload = function(){
+            document.getElementById("loading").style.display = "none"
+        }
+    </script>
+
+    <script language="javascript" type="text/javascript">      
+        $(document).ready(function(){
+            $("#myform").on("submit", function(){
+                $("#pageloader").fadeIn();
+            });//submit
+        });//document ready
+    </script>
 </body>
 </html> 
 

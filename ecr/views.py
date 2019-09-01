@@ -15,7 +15,7 @@ def analyze(request):
 
     form = AnalyzeForm(request.POST or None, initial={'cutoff':0.05})
     context = {
-        'title': 'Analyze',
+        'title': 'Exploratory Analysis',
         'form':form,
         'success':success,
     }
@@ -36,7 +36,7 @@ def promoter(request):
 
     form = PromoterMiningForm(request.POST or None, initial={'size':1000})
     context = {
-        'title':'Promoter Mining',
+        'title':'Promoter Download',
         'form':form,
         'success':success,
     }
@@ -52,7 +52,7 @@ def protein(request):
 
     form = MiningForm(request.POST or None)
     context = {
-        'title':'Protein Mining',
+        'title':'Protein Download',
         'form':form,
         'success':success,
     }
@@ -68,7 +68,7 @@ def transcript(request):
 
     form = MiningForm(request.POST or None)
     context = {
-        'title':'Transcript Mining',
+        'title':'Transcript Download',
         'form':form,
         'success':success,
     }

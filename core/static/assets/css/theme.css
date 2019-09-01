@@ -5063,6 +5063,10 @@ input[type="button"].btn-block {
     margin-bottom: 0
 }
 
+.card-text > img{
+    max-width:500px;
+}
+
 .card-text:last-child {
     margin-bottom: 0
 }
@@ -11122,7 +11126,6 @@ a.theme-link:hover {
 
 .docs-overview .card:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-    background: #f4fcf6
 }
 
 .docs-overview .card:hover .card-icon-holder {

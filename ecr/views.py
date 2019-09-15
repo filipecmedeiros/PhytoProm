@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.urls import reverse
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponse
 
 from .forms import AnalyzeForm, PromoterMiningForm, MiningForm
 import json
@@ -78,3 +78,9 @@ def transcript(request):
         context['success'] = True
     
     return render (request, 'ecr/mining.html', context)
+
+from .tasks import slow_task
+
+def celery(request):
+    slow_task.delay()
+    return HttpResponse('Finished')

@@ -5,21 +5,15 @@
 {% load static %}
 {% load widget_tweaks %}
     <div class="home">
-        <p><span class="tab">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
-        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero 
-        eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea 
-        takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur 
-        sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna 
-        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea 
-        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
-        amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
-        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos 
-        et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata 
-        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit 
-        amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores 
-        et ea rebum. Stet clita kasd gubergren, no sea takimata 
-        sanctus est.</p>
+        <p><span class="tab">Phytoprom is a mining, identification and enrichment analysis tool for candidate 
+            cis-regulatory elements (CCREs) in plant genomes available on Phytozome database. It is a
+            user-friendly web application, providing a way to characterize the large-scale gene
+            datasets such as those from transcriptome analysis. The present platform is web-based
+            and easy to handle graphical-user interface, which allows users to readily input gene
+            lists with Phytozome IDs. Additionally, Phytoprom makes it possible to download sets
+            of species-specific promoters, transcripts and proteins under study for analysis in other
+            databases.</p>
+    <p>For more information, see documentation section.</p>
     </div>
 {% endblock %}
 
@@ -36,7 +30,14 @@
                                 </h5>
                                 <div class="card-text">
                                     <img class="img-responsive" src="{% static 'img/graphic.png' %}">
-                                    Section overview goes here. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                                    <ul>
+                                        <li>
+                                            Visual output for rapid “at a glance” insight of enriched CCREs distribution in the scrutinized sample;
+                                        </li>
+                                        <li>
+                                            Online chart creation in .pdf format for data publication on scientific journals;
+                                        </li>
+                                    </ul>
                                 </div>
                                 <a class="card-link-mask" href="#"></a>
                             </div><!--//card-body-->
@@ -50,7 +51,17 @@
                                 </h5>
                                 <div class="card-text">
                                     <img class="img-responsive" src="{% static 'img/tabular.png' %}">
-                                    Section overview goes here. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+                                    <ul>
+                                        <li>
+                                            The tabular output contains detailed information of the analyzed CCREs (enriched or not);
+                                        </li>
+                                        <li>
+                                            The table shows the mined motifs, associated TF identification and statistical data;
+                                        </li>
+                                        <li>
+                                            Also presents links to scientific manuscripts with information on the function of associated TF in plants under stress conditions;
+                                        </li>
+                                    </ul>
                                 </div>
                                 <a class="card-link-mask" href="#"></a>
                             </div><!--//card-body-->

@@ -213,10 +213,12 @@
         </div>
     </div>
     {% endif %}
-
+{{ key|json_script:"hello-data" }}
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript">
-    $.get("{% url 'api' %}", function(data) {
+    var id = JSON.parse(document.getElementById('hello-data').textContent);
+    console.log(id);
+    $.get("{% url 'api' key=12345 %}".replace(/12345/, id.toString()), function(data) {
 
     var margin = {'left': 100, 'right': 140, 'top': 10, 'bottom': 100};
 

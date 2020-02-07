@@ -20,7 +20,7 @@ from ecr.views import index, analyze, api, promoter, protein, transcript, celery
 urlpatterns = [
     re_path(r'^$', index, name='index'),
     re_path(r'^analyze/$', analyze, name='analyze'),
-    re_path(r'^api/$', api, name='api'),
+    re_path(r'^api/(?P<key>[\w_-]*)/$', api, name='api'),
     re_path(r'^promoter/$', promoter, name='promoter'),
     re_path(r'^protein/$', protein, name='protein'),
     re_path(r'^transcript/$', transcript, name='transcript'),

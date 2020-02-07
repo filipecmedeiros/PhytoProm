@@ -17,17 +17,17 @@ def analyze(request):
     context = {
         'title': 'Exploratory Analysis',
         'form':form,
-        'success':success,
-        'key':request.session._get_or_create_session_key()
+        'success':success
     }
 
     if form.is_valid():
+        context['key'] = request.session._get_or_create_session_key()
         context = form.analyze(context['key'])
     
     return render (request, 'ecr/analyze.html', context)
 
-def api(request):
-    json_file = 'ecr/templates/data/{}.json'.format(request.session.session_key)
+def api(request, key=None):
+    json_file = 'ecr/templates/data/{}.json'.format(key)
     json_data=open(json_file)
     data = json.load(json_data)
     return JsonResponse(data, safe=False)

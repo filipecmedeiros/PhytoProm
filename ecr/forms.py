@@ -13,9 +13,6 @@ class AnalyzeForm(forms.Form):
     cluster = forms.CharField(label='Input locus ID', widget=forms.Textarea())
     cutoff = forms.FloatField(label='Cut off')
 
-    #def __init__(self, *args, **kwargs):
-    #    super(AnalyzeForm, self).__init__(*args, **kwargs)
-
     def analyze(self, key):
         specie = self.cleaned_data['specie']
         cluster = self.cleaned_data['cluster']
@@ -86,6 +83,7 @@ class AnalyzeForm(forms.Form):
             'enrichment':enrichment.values.tolist(),
             'size':size,
             'now':now,
+            'key':key
         }
         return context
 

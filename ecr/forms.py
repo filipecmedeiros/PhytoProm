@@ -13,7 +13,10 @@ class AnalyzeForm(forms.Form):
     cluster = forms.CharField(label='Input locus ID', widget=forms.Textarea())
     cutoff = forms.FloatField(label='Cut off')
 
-    def analyze(self):
+    #def __init__(self, *args, **kwargs):
+    #    super(AnalyzeForm, self).__init__(*args, **kwargs)
+
+    def analyze(self, key):
         specie = self.cleaned_data['specie']
         cluster = self.cleaned_data['cluster']
         cutoff = self.cleaned_data['cutoff']
@@ -22,6 +25,8 @@ class AnalyzeForm(forms.Form):
         specie = specie.id.split(' ')[0]
         specie = specie.lower()
         specie = specie+'_genome'
+
+        file_name = 'ecr/templates/data/{}.json'.format(key)
 
         df = pd.DataFrame(list(Background.objects.all().values(
             'id', 'name', 'family', 'motifs', 'reverseComplement', specie)))
@@ -70,7 +75,7 @@ class AnalyzeForm(forms.Form):
         now = datetime.now()
         now = now.strftime('%Y%m%d%H%M%S')
         graphic = pd.merge(log, enrichment, left_on='tf', right_on='id', how='inner')
-        graphic.to_json(r'ecr/templates/data/analysis.json', orient='records')
+        graphic.to_json(file_name, orient='records')
 
         context = {
             'title': 'Exploratory Analysis',

@@ -96,9 +96,19 @@ class Background(models.Model):
         'Motivos', max_length=10000, null=False, blank=False)
     reverseComplement = models.CharField(
         'Complemento reverso', max_length=10000, null=False, blank=False)
-    vigna_genome = models.IntegerField('Genoma de Vigna')
-    glycine_genome = models.IntegerField('Genoma de Glycine')
-    vitis_genome = models.IntegerField('Genoma de Vitis')
+    glycine_max = models.IntegerField('Glycine max', default=0)
+    vigna_unguiculata = models.IntegerField('Vigna unguiculata', default=0)
+    vitis_vinifera = models.IntegerField('Vitis vinifera', default=0)
+    phaseolus_vulgaris = models.IntegerField('Phaseolus vulgaris', default=0)
+    medicago_truncatula = models.IntegerField('Medicago truncatula', default=0)
+    trifolium_pratense = models.IntegerField('Trifolium pratense', default=0)
+    arabidopsis_thaliana = models.IntegerField('Arabidopsis thaliana', default=0)
+    ricinus_communis = models.IntegerField('Ricinus communis', default=0)
+    oryza_sativa = models.IntegerField('Oryza sativa', default=0)
+    zea_mays = models.IntegerField('Zea mays', default=0)
+    physcomitrella_patens = models.IntegerField('Physcomitrella patens', default=0)
+    hordeum_vulgare = models.IntegerField('Hordeum vulgare', default=0)
+    manihot_esculenta = models.IntegerField('Manihot esculenta', default=0)
 
     class Meta:
         verbose_name = 'Background'

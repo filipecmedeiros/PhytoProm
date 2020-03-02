@@ -7,6 +7,7 @@ from .models import Specie, Log, Background, Transcriptor
 import json
 from datetime import datetime
 
+
 class AnalyzeForm(forms.Form):
     specie = forms.ModelChoiceField(
         label='Specie', queryset=Specie.objects.all(), widget=forms.Select())
@@ -19,28 +20,29 @@ class AnalyzeForm(forms.Form):
         cutoff = self.cleaned_data['cutoff']
         cluster = cluster.split('\r\n')
         size = len(cluster)
-        specie = specie.id.split(' ')[0]
-        specie = specie.lower()
-        specie = specie+'_genome'
+        specie = specie.id
+        specie_ = specie.lower().replace(' ', '_')
 
         file_name = 'ecr/templates/data/{}.json'.format(key)
 
         df = pd.DataFrame(list(Background.objects.all().values(
-            'id', 'name', 'family', 'motifs', 'reverseComplement', specie)))
+            'id', 'name', 'family', 'motifs', 'reverseComplement', specie_)))
 
         df['cluster'] = 0
 
-        queryset = Log.objects.filter(promoter_id__in=cluster)
-        log = pd.DataFrame(list(queryset.values(
-            'promoter_id', 'tf', 'upstream', 'downstream', 'mean', 'sumatory')))
-
+        log = pd.read_csv('ecr/logs/{} genome.csv'.format(specie),
+            sep=',', index_col=0)
+        log.drop(columns=['name', 'family_id', 'motifs', 'reverseComplement'],
+            axis=1, inplace=True)
+        log = log[log.promoter_id.isin(cluster)]
+        
         enrichment = log.groupby('tf').sum().reset_index()
 
         tf = Transcriptor.objects.all().exclude(id__in=enrichment.tf)
         tf = pd.DataFrame(list(tf.values('id')))
         tf.rename(columns={'id': 'tf'}, inplace=True)
         tf['mean'] = 0
-        tf['sumatory'] = 0
+        tf['sum'] = 0
 
         enrichment = pd.concat([enrichment, tf])
         enrichment = enrichment.sort_values(by='tf')
@@ -49,21 +51,15 @@ class AnalyzeForm(forms.Form):
         df = df.sort_values(by='id')
         df = df.reset_index(drop=True)
 
-        df['cluster'] = enrichment['sumatory']
+        df['cluster'] = enrichment['sum']
 
-        if (specie == 'vigna_genome'):
-            genome = df.vigna_genome.sum()
-        elif (specie == 'glycine_genome'):
-            genome =df.glycine_genome.sum()
-        elif (specie == 'vitis_genome'):
-            genome =df.vitis_genome.sum()
+        genome = df[specie_].sum()
 
         cluster = df.cluster.sum()
 
         df['p-value'] = 0
         df['p-value'] = df.apply(lambda x: stats.fisher_exact(
-            [[x[specie], x['cluster']], [genome, cluster]])[1], axis=1)
-
+            [[x[specie_], x['cluster']], [genome, cluster]])[1], axis=1)
 
         enrichment = df.copy()
 
@@ -79,7 +75,7 @@ class AnalyzeForm(forms.Form):
             'success': True,
             'dataframe':df.values.tolist(),
             'specie': self.cleaned_data['specie'],
-            'log': list(queryset),
+            'log': log.values.tolist(),
             'enrichment':enrichment.values.tolist(),
             'size':size,
             'now':now,

@@ -191,18 +191,15 @@
                                     <th>Upstream</th>
                                     <th>Downstream</th>
                                     <th>Mean</th>
-                                    <th>Sumatory</th>
+                                    <th>Summatory</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for row in log %}
+                                {% for list in log %}
                                     <tr class="">
-                                        <td>{{ row.promoter_id }}</a></td>
-                                        <td>{{ row.tf }}</td>
-                                        <td>{{ row.upstream }}</td>
-                                        <td>{{ row.downstream }}</td>
-                                        <td class="center">{{ row.mean }}</td>
-                                        <td class="center">{{ row.sumatory }}</td>
+                                    {% for row in list %}
+                                        <td>{{ row}}</td>
+                                    {% endfor %}
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -366,7 +363,8 @@
     legend.append("text")
         .attr("x", width + margin.left + 45)
         .attr("y", d=>legendScale(d.tf)+30)
-        .text(d=>d.tf);
+        .style("font-size", "12pt")
+        .text(d=>d.name);
     });
 </script>
 

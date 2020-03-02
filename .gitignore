@@ -3,6 +3,8 @@ Artigos/
 backup/Dump 2019-09-14.sql
 PhytoProm/local_settings.py
 ecr/templates/data/
+ecr/logs/*.csv
+Data science/PhytoProm 2.0/Merged Logs/*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

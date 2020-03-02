@@ -30,8 +30,10 @@ class LogAdmin(admin.ModelAdmin):
 	filter_list = ['promoter_id', 'tf_id']
 
 class BackgroundAdmin(admin.ModelAdmin):
-	list_display = ['id', 'name', 'motifs', 'reverseComplement', 'vigna_genome', 'glycine_genome',
-                    'vitis_genome']
+	list_display = ['id', 'name', 'motifs', 'reverseComplement', 'glycine_max', 
+	'vigna_unguiculata', 'vitis_vinifera', 'phaseolus_vulgaris', 'medicago_truncatula',
+	'trifolium_pratense', 'arabidopsis_thaliana', 'ricinus_communis', 'oryza_sativa',
+	'zea_mays', 'physcomitrella_patens', 'hordeum_vulgare', 'manihot_esculenta']
 	search_list = ['id', 'name', 'motifs', 'reverseComplement']
 	filter_list = ['id', 'name']
 

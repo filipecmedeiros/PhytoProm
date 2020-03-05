@@ -1,4 +1,8 @@
 from django import forms
+
+from django.core.mail import send_mail
+from django.conf import settings
+
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
@@ -148,3 +152,18 @@ class MiningForm(forms.Form):
                                     row["sequence.residues"]+'\n')
 
         return output
+
+class SuggestionsForm (forms.Form):
+
+    name = forms.CharField(label='Name')
+    email = forms.EmailField(label='Email')
+    message = forms.CharField(label='Message', widget=forms.Textarea())
+
+    def send_mail(self):
+        name = self.cleaned_data['name']
+        email = self.cleaned_data['email']
+        message = self.cleaned_data['message']
+        message = 'Name: {0}\nEmail: {1}\n{2}'.format(name, email, message)
+        send_mail('PhytoProm suggestions', message,
+            settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
+        return True

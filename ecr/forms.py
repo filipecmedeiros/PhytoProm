@@ -15,8 +15,8 @@ from datetime import datetime
 class AnalyzeForm(forms.Form):
     specie = forms.ModelChoiceField(
         label='Specie', queryset=Specie.objects.all(), widget=forms.Select())
-    cluster = forms.CharField(label='Input locus ID', widget=forms.Textarea())
-    cutoff = forms.FloatField(label='Cut off')
+    cluster = forms.CharField(label='Input Phytozome v12.1 Locus ID', widget=forms.Textarea())
+    cutoff = forms.FloatField(label='Cut off ≤')
 
     def analyze(self, key):
         specie = self.cleaned_data['specie']
@@ -64,7 +64,7 @@ class AnalyzeForm(forms.Form):
         df['p-value'] = 0
         df['p-value'] = df.apply(lambda x: stats.fisher_exact(
             [[x[specie_], x['cluster']], [genome, cluster]])[1], axis=1)
-
+        df['p-value'] = df['p-value'].apply(lambda x: round(x,4))
         enrichment = df.copy()
 
         enrichment = enrichment.loc[enrichment['p-value'] <= cutoff]
@@ -89,8 +89,8 @@ class AnalyzeForm(forms.Form):
 
 
 class PromoterMiningForm(forms.Form):
-    promoter = forms.CharField(label='PhytoMine Locus ID', widget=forms.Textarea())
-    size = forms.IntegerField(label='Promoter size (Max. 5000)', max_value=5000, min_value=1)
+    promoter = forms.CharField(label='Phytozome v12.1 Locus ID', widget=forms.Textarea())
+    size = forms.IntegerField(label='Promoter size (Max. 5000 nt)', max_value=5000, min_value=1)
 
 
     def mine (self):
@@ -127,7 +127,7 @@ class PromoterMiningForm(forms.Form):
 
 
 class MiningForm(forms.Form):
-    locus_id = forms.CharField(label='PhytoMine Locus ID', widget=forms.Textarea())
+    locus_id = forms.CharField(label='Phytozome v12.1 Locus ID', widget=forms.Textarea())
 
     def mine (self, category):
         locus_id = self.cleaned_data['locus_id']

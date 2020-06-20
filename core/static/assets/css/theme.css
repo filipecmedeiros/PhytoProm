@@ -11549,3 +11549,10 @@ a.theme-link:hover {
         padding-top: 0.5rem
     }
 }
+
+.promoters > p{
+  overflow-wrap: break-word; 
+  text-align: justify;
+  display: block;
+  word-wrap: break-word;
+}

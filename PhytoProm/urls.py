@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from ecr.views import index, analyze, api, promoter, protein, transcript, suggestions
+from ecr.views import index, analyze, api, promoter, protein, transcript, documentation, suggestions
 
 urlpatterns = [
     re_path(r'^$', index, name='index'),
@@ -24,6 +24,7 @@ urlpatterns = [
     re_path(r'^promoter/$', promoter, name='promoter'),
     re_path(r'^protein/$', protein, name='protein'),
     re_path(r'^transcript/$', transcript, name='transcript'),
+    re_path(r'^documentation/$', documentation, name='documentation'),
     re_path(r'^suggestions/$', suggestions, name='suggestions'),
     path('admin/', admin.site.urls),
 ]

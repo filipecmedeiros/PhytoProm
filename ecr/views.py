@@ -85,6 +85,8 @@ def transcript(request):
     
     return render(request, 'ecr/mining.html', context)
 
+def documentation(request):
+    return render(request, 'ecr/documentation.html')
 
 def suggestions(request):
     success = False

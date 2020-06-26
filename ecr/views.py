@@ -5,6 +5,8 @@ from django.http import JsonResponse, Http404, HttpResponse
 
 from .forms import AnalyzeForm, PromoterMiningForm, MiningForm, SuggestionsForm
 import json
+from .samples import *
+
 
 # Create your views here.
 def index(request):
@@ -18,7 +20,10 @@ def analyze(request):
     context = {
         'title': 'Exploratory Analysis',
         'form':form,
-        'success':success
+        'success':success,
+        'sample_specie': SPECIE,
+        'sample_locus': ANALYTICS,
+        'sample_cutoff': CUTOFF
     }
 
     if form.is_valid():
@@ -43,6 +48,8 @@ def promoter(request):
         'title':'Promoter Download',
         'form':form,
         'success':success,
+        'sample_locus':PROMOTER,
+        'sample_size': SIZE,
     }
 
     if form.is_valid():
@@ -60,6 +67,7 @@ def protein(request):
         'title':'Protein Download',
         'form':form,
         'success':success,
+        'sample_locus':PROTEIN,
     }
 
     if form.is_valid():
@@ -77,6 +85,7 @@ def transcript(request):
         'title':'Transcript Download',
         'form':form,
         'success':success,
+        'sample_locus':TRANSCRIPT,
     }
 
     if form.is_valid():

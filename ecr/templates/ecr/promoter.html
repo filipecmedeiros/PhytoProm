@@ -36,6 +36,10 @@
                   <div class="col-md-9 col-md-offset-3">
                     <br/>
                     <button type="submit" class="btn btn-primary">Run</button>
+                    <button id="autofill" class="btn btn-primary" type="button" 
+                        data-locus="{{ sample_locus }}" data-size="{{ sample_size }}">
+                        Fill with sample
+                    </button>
                   </div>
                 </div>
             </fieldset>
@@ -55,6 +59,18 @@
         <div class="col-lg-3"></div>
     {%endif%}
 </div>
+
+<script type="text/javascript">
+    const buttons = document.querySelectorAll("button");
+    const locusField = document.getElementById("id_promoter");
+    const sizeField = document.getElementById("id_size");
+
+    button = document.getElementById("autofill");
+    button.addEventListener("click", () => {
+        locusField.value = button.dataset.locus;
+        sizeField.value = button.dataset.size;
+    });
+</script>
 
 <script type="text/javascript">
     var csv = '{{ promoters |escapejs }}';

@@ -36,6 +36,10 @@
                   <div class="col-md-9 col-md-offset-3">
                     <br/>
                     <button type="submit" class="btn btn-primary">Run</button>
+                    <button id="autofill" class="btn btn-primary" type="button" 
+                        data-locus="{{ sample_locus }}">
+                        Fill with sample
+                    </button>
                   </div>
                 </div>
             </fieldset>
@@ -56,6 +60,15 @@
     {%endif%}
 </div>
 
+<script type="text/javascript">
+    const buttons = document.querySelectorAll("button");
+    const locusField = document.getElementById("id_locus_id");
+
+    button = document.getElementById("autofill");
+    button.addEventListener("click", () => {
+        locusField.value = button.dataset.locus;
+    });
+</script>
 
 <script type="text/javascript">
     var csv = '{{ output |escapejs }}';

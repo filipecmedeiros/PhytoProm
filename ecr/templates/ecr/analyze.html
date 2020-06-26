@@ -40,6 +40,11 @@
                   <div class="col-md-9 col-md-offset-3">
                     <br/>
                     <button type="submit" class="btn btn-primary">Run</button>
+                    <button id="autofill" class="btn btn-primary" type="button" 
+                        data-specie="{{ sample_specie }}" data-locus="{{ sample_locus }}"
+                        data-cutoff="{{ sample_cutoff }}">
+                        Fill with sample
+                    </button>
                   </div>
                 </div>
             </fieldset>
@@ -212,6 +217,20 @@
     </div>
     {% endif %}
 {{ key|json_script:"hello-data" }}
+
+<script type="text/javascript">
+    const buttons = document.querySelectorAll("button");
+    const specieField = document.getElementById("id_specie");
+    const locusField = document.getElementById("id_cluster");
+    const cutoffField = document.getElementById("id_cutoff");
+
+    button = document.getElementById("autofill");
+    button.addEventListener("click", () => {
+        specieField.value = button.dataset.specie;
+        locusField.value = button.dataset.locus;
+        cutoffField.value = button.dataset.cutoff;
+    });
+</script>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript">
     var id = JSON.parse(document.getElementById('hello-data').textContent);

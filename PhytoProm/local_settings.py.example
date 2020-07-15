@@ -3,7 +3,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
-ALLOWED_HOSTS = []
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -24,11 +23,21 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'OPTIONS': {
+            'connect_timeout': 5,
+        }
     }
+
 }
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#E-mail
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'phytoprom@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'phytoprom@gmail.com'
 
 SECRET_KEY = ''
 
